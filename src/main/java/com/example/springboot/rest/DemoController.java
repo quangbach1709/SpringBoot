@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     private Coach myCoach;
+    private Coach anotherCoach;
 
     @Autowired
-    public void setCoach(@Qualifier("tennisCoach") Coach theCoach) {
+    public DemoController(
+            @Qualifier("tennisCoach") Coach theCoach,
+            @Qualifier("tennisCoach") Coach theanotherCoach) {
+        System.out.println("in constructor: " + getClass().getSimpleName());
+        anotherCoach = theanotherCoach;
         myCoach = theCoach;
     }
 
@@ -19,4 +24,10 @@ public class DemoController {
     public String getDailyWorkout() {
         return myCoach.getDailyWorkout();
     }
+
+    @GetMapping("/check")
+    public String check() {
+        return "Check myCoach == anotherCoach: " + (myCoach == anotherCoach);
+    }
+
 }

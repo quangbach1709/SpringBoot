@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)//Moi lan goi bean nay se tao moi 1 bean moi khac
 public class TennisCoach implements Coach {
 
-    @PostConstruct //Khi khoi tao bean nay xong thi chay ham nay ngay
-    public void doMyStartupStuff() {
-        System.out.println("In doMyStartupStuff " + getClass().getSimpleName());
-    }
+//    @PostConstruct //Khi khoi tao bean nay xong thi chay ham nay ngay
+//    public void doMyStartupStuff() {
+//        System.out.println("In doMyStartupStuff " + getClass().getSimpleName());
+//    }
 
-    @PreDestroy //Khi bean nay bi huy thi chay ham nay truoc
-    public void doMyCleanupStuff() {
-        System.out.println("In doMyCleanupStuff " + getClass().getSimpleName());
-    }
+//    @PreDestroy //Khi bean nay bi huy thi chay ham nay truoc
+//    public void doMyCleanupStuff() {
+//        System.out.println("In doMyCleanupStuff " + getClass().getSimpleName());
+//    }
 
     @Override
     public String getDailyWorkout() {

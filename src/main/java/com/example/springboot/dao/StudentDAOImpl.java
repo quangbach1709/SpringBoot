@@ -21,6 +21,6 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     @Transactional
     public void save(Student theStudent) {
-        entityManager.persist(theStudent);//save or update the student
+        entityManager.persist(theStudent);//save or update the student object vao database
     }
 }

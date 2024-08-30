@@ -19,10 +19,27 @@ public class Application {
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
 //            createStudent(studentDAO);
+//            createMultipleStudents(studentDAO);
 
-            createMultipleStudents(studentDAO);
+            readStudent(studentDAO);
         };
 
+    }
+
+    private void readStudent(StudentDAO studentDAO) {
+        //create a student object
+        System.out.println("Create a new student");
+        Student tempStudent = new Student("Daffy", "Duck", "bachdz@gmail.com");
+        //save the student object
+        System.out.println("Saving the student");
+        studentDAO.save(tempStudent);
+        //display id the student object
+        System.out.println("Saved student. Generated id: " + tempStudent.getId());
+        //retrieve student based on the id: primary key
+        System.out.println("Getting student with id: " + tempStudent.getId());
+        Student myStudent = studentDAO.findById(tempStudent.getId());
+        //display the student object
+        System.out.println("Found the student: " + myStudent);
     }
 
     private void createMultipleStudents(StudentDAO studentDAO) {

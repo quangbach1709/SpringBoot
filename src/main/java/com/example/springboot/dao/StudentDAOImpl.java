@@ -2,9 +2,12 @@ package com.example.springboot.dao;
 
 import com.example.springboot.entity.Student;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -27,5 +30,13 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public Student findById(Integer id) {
         return entityManager.find(Student.class, id);//return the student object with the given id or null if not found
+    }
+
+    @Override
+    public List<Student> findAll() {
+        //create a query tao ra mot cau truy van
+        TypedQuery<Student> theQuery = entityManager.createQuery("from Student", Student.class);
+        //return the result list tra ve danh sach ket qua
+        return theQuery.getResultList();
     }
 }

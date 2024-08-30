@@ -1,5 +1,7 @@
 package com.example.springboot;
 
+import com.example.springboot.dao.StudentDAO;
+import com.example.springboot.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +16,24 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner() {
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-            System.out.println("Hello Spring Boot");
+            createStudent(studentDAO);
         };
+
+    }
+
+    private void createStudent(StudentDAO studentDAO) {
+        //create a student
+        System.out.println("Create a new student");
+        Student tempStudent = new Student("John", "Doe", "bachh1124@gmail.com");
+
+        //save the student
+        System.out.println("Saving the student");
+        studentDAO.save(tempStudent);
+
+        //display the id student
+        System.out.println("Saved student. Generated id: " + tempStudent.getId());
 
     }
 

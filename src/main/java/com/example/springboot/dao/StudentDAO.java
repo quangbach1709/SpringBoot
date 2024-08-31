@@ -10,5 +10,7 @@ public interface StudentDAO {
     Student findById(Integer id);//tim kiem student dua tren id
 
     List<Student> findAll();//lay tat ca student
+
+    List<Student> findByLastName(String theLastName);//tim kiem student dua tren ten ho
 }
 

@@ -26,9 +26,16 @@ public class Application {
 //            queryForStudent(studentDAO);
 //            queryForStudentByLastName(studentDAO);
 //            updateStudent(studentDAO);
-            deleteStudent(studentDAO);
+//            deleteStudent(studentDAO);
+            deleteAllStudents(studentDAO);
         };
 
+    }
+
+    private void deleteAllStudents(StudentDAO studentDAO) {
+        System.out.println("Deleting all students");
+        int numRowDeleted = studentDAO.deleteAll();
+        System.out.println("Number of rows deleted: " + numRowDeleted);
     }
 
     private void deleteStudent(StudentDAO studentDAO) {

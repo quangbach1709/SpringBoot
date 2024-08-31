@@ -22,7 +22,7 @@ public class StudentDAOImpl implements StudentDAO {
 
     //implement the save method
     @Override
-    @Transactional
+    @Transactional //can them khi thay doi du lieu trong database
     public void save(Student theStudent) {
         entityManager.persist(theStudent);//save or update the student object vao database
     }
@@ -48,5 +48,11 @@ public class StudentDAOImpl implements StudentDAO {
         theQuery.setParameter("theData", theLastName);
         //return the result list tra ve danh sach ket qua
         return theQuery.getResultList();
+    }
+
+    @Override
+    @Transactional //can them khi thay doi du lieu trong database
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);//save or update the student object vao database
     }
 }

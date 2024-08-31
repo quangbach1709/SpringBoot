@@ -24,10 +24,25 @@ public class Application {
 //            createMultipleStudents(studentDAO);
 //            readStudent(studentDAO);
 //            queryForStudent(studentDAO);
+//            queryForStudentByLastName(studentDAO);
+            updateStudent(studentDAO);
 
-            queryForStudentByLastName(studentDAO);
         };
 
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        //retrieve student based on the id: primary key
+        int studentId = 1;
+        System.out.println("Getting student with id: " + studentId);
+        Student myStudent = studentDAO.findById(studentId);
+        //change first name
+        System.out.println("Updating student...");
+        myStudent.setFirstName("Scooby");
+        //update the student
+        studentDAO.update(myStudent);
+        //display the student object
+        System.out.println("Updated student: " + myStudent);
     }
 
     private void queryForStudentByLastName(StudentDAO studentDAO) {

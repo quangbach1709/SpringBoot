@@ -1,44 +1,51 @@
 package com.example.springboot.service;
 
-import com.example.springboot.dao.EmployeeDAO;
+
+import com.example.springboot.dao.EmployeeRepository;
 import com.example.springboot.entity.Employee;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service // chi ra rang day la 1 bean service cua Spring
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeDAO employeeDAO;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeDAO theEmployeeDAO) {
-        employeeDAO = theEmployeeDAO;
+    public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository) {
+        employeeRepository = theEmployeeRepository;
     }
 
     @Override
-    public List<Employee> findAll() {// thuc thi phuong thuc findAll cua EmployeeDAO interface
-        return employeeDAO.findAll();
+    public List<Employee> findAll() {// thuc thi phuong thuc findAll cua EmployeeRepository interface
+        return employeeRepository.findAll();
     }
 
     @Override
     public Employee findById(int theId) {
-        return employeeDAO.findById(theId);
+        Optional<Employee> result = employeeRepository.findById(theId);//y nghia cua Optional: Optional la 1 class trong Java cung cap cac phuong thuc de kiem tra xem 1 doi tuong co null hay khong
+        // thuc thi phuong thuc findById cua EmployeeRepository interface de tim kiem 1 employee theo id
+        Employee theEmployee;
+        if (result.isPresent()) {
+            theEmployee = result.get();
+        } else {
+            // we didn't find the employee
+            throw new RuntimeException("Did not find employee id - " + theId);
+        }
+        return theEmployee;
     }
 
-    @Transactional
-    // chi ra rang day la 1 phuong thuc can duoc quan ly transaction cua Spring can them khi co thay doi du lieu trong database
     @Override
     public Employee save(Employee theEmployee) {
-        return employeeDAO.save(theEmployee);
+        return employeeRepository.save(theEmployee);
     }
 
-    @Transactional
-    // chi ra rang day la 1 phuong thuc can duoc quan ly transaction cua Spring can them khi co thay doi du lieu trong database
     @Override
     public void deleteById(int theId) {
-        employeeDAO.deleteById(theId);
+        employeeRepository.deleteById(theId);
     }
 }

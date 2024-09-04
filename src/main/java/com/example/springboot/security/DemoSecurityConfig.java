@@ -37,9 +37,24 @@ public class DemoSecurityConfig {
 //        return new InMemoryUserDetailsManager(john, mary, susan);
 //    }
     //add support for jdbc ... no more in-memory users
+
+    //    @Bean
+//    public InMemoryUserDetailsManager userDetailsManager() {//tao ra cac user trong bo nho de su dung	    public UserDetailsManager userDetailsManager(DataSource dataSource) {//tao ra cac user trong database de su dung thay vi luu trong bo nho nhu tren (InMemoryUserDetailsManager)
+//        UserDetails john = User.builder()	        return new JdbcUserDetailsManager(dataSource);//su dung JdbcUserDetailsManager de quan ly cac user trong database thay vi luu trong bo nho
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {//tao ra cac user trong database de su dung thay vi luu trong bo nho nhu tren (InMemoryUserDetailsManager)
-        return new JdbcUserDetailsManager(dataSource);//su dung JdbcUserDetailsManager de quan ly cac user trong database thay vi luu trong bo nho
+        //su dung JdbcUserDetailsManager de quan ly cac user trong database thay vi luu trong bo nho
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        //define query to retrieve a user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(//cau lenh de lay thong tin user tu database dua vao username cua user
+                "select user_id, pw, active form members where user_id=?"
+        );
+
+        //define query to retrieve the authority / role for a user
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(//cau lenh de lay thong tin role cua user dua vao username cua user
+                "select user_id, roles from roles where user_id=?"
+        );
+        return jdbcUserDetailsManager;
     }
 
 

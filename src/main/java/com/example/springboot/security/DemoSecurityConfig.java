@@ -52,7 +52,7 @@ public class DemoSecurityConfig {
 
         //define query to retrieve the authority / role for a user
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(//cau lenh de lay thong tin role cua user dua vao username cua user
-                "select user_id, roles from roles where user_id=?"
+                "select user_id, roles from role where user_id=?"
         );
         return jdbcUserDetailsManager;
     }

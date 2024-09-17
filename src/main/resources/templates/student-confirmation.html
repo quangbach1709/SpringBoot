@@ -18,5 +18,11 @@ Country: <span th:text="${student.country}"></span> <!-- goi den phuong thuc get
 <br>
 Favorite Language: <span th:text="${student.favoriteLanguage}"></span>
 <!-- goi den phuong thuc getFavoriteLanguage cua student -->
+<br>
+Favorite Operating System:
+<!-- goi den phuong thuc getFavoriteSystems cua student -->
+<ul>
+    <li th:each="tempSystem : ${student.favoriteSystems}" th:text="${tempSystem}"></li>
+</ul>
 </body>
 </html>

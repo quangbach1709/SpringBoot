@@ -18,6 +18,7 @@
     <br>
     <label for="lastName">Last Name:</label>
     <input id="lastName" name="lastName" th:field="*{lastName}" type="text"/>
+    <!-- th:field la thuoc tinh cua thymeleaf de input data vao object -->
     <br>
     Country:
     <select th:field="*{country}">
@@ -30,7 +31,16 @@
                 th:text="${tempCountry}"
                 th:value="${tempCountry}"></option>
     </select>
+    <br>
+    Favorite Language:
+    <!--    <input th:field="*{favoriteLanguage}" th:value="java" type="radio"/> Java-->
+    <!--    <input th:field="*{favoriteLanguage}" th:value="csharp" type="radio"/> C#-->
+    <!--    <input th:field="*{favoriteLanguage}" th:value="php" type="radio"/> PHP-->
 
+    <input th:each="tempLanguage : ${languages}" th:field="*{favoriteLanguage}"
+           th:text="${tempLanguage}"
+           th:value="${tempLanguage}"
+           type="radio"/>
     <br>
     <input type="submit" value="Submit"/>
 </form>

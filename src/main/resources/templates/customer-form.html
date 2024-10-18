@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
 >
+<!---->
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
@@ -20,7 +21,7 @@
 <form method="post" th:action="@{/processForm}" th:object="${customer}">
     First Name: <input th:field="*{firstName}" type="text">
     <br><br>
-    Last Name: <input th:field="*{lastName}" type="text"/>
+    Last Name(*): <input th:field="*{lastName}" type="text"/>
     <span class="error"
           th::if="${#fields.hasErrors('lastName')}"
           th:errors="*{lastName}"></span>

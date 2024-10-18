@@ -18,6 +18,7 @@ public class CustomerController {
         return "customer-form";
     }
 
+    // xu ly form khi submit
     @PostMapping("/processForm")
     public String processForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
         //lay ra doi tuong customer tu form va kiem tra xem co loi hay khong

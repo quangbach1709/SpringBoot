@@ -1,5 +1,6 @@
 package com.example.springboot;
 
+import com.example.springboot.validation.CourseCodeBach;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -15,6 +16,9 @@ public class Customer {
     // kiem tra xem co dung dinh dạng hay không (5 ký tự hoặc 5 số)
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
     private String postalCode;
+    @CourseCodeBach
+//    @CourseCodeBach(value = "bachdz", message = "must start with bachdz") // kiem tra xem co bat dau bang BACH hay khong
+    private String courseCode;
 
     public String getFirstName() {
         return firstName;
@@ -47,5 +51,13 @@ public class Customer {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 }

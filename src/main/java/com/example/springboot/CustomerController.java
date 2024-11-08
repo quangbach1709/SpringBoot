@@ -32,6 +32,8 @@ public class CustomerController {
     @PostMapping("/processForm")
     public String processForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) {
         System.out.println("Last name: |" + customer.getLastName() + "|");
+        System.out.println("Binding resultts: " + bindingResult.toString());
+        System.out.println("\n\n");
         //lay ra doi tuong customer tu form va kiem tra xem co loi hay khong
         if (bindingResult.hasErrors()) {
             return "customer-form";

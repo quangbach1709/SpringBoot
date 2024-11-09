@@ -30,8 +30,13 @@
             <td th:text="${tempEmployee.getFirstName()}"></td>
             <td th:text="${tempEmployee.lastName}"></td>
             <td th:text="${tempEmployee.email}"></td>
-            <td><a class="btn btn-info btn-sm"
+            <td>
+                <a class="btn btn-info btn-sm"
                    th:href="@{/employees/showFormForUpdate(employeeID = ${tempEmployee.getId()})}">Update</a>
+
+                <a class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false;"
+                   th:href="@{/employees/delete(employeeID = ${tempEmployee.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

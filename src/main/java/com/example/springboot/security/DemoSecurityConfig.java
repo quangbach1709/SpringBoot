@@ -2,9 +2,12 @@ package com.example.springboot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class DemoSecurityConfig {
@@ -26,5 +29,20 @@ public class DemoSecurityConfig {
                 .roles("EMPLOYEE", "MANAGER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(jphn, mary, susan);
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(configurer ->
+                        configurer
+                                .anyRequest().authenticated()
+                )
+                .formLogin(form ->
+                        form
+                                .loginPage("/showMyLoginPage")
+                                .loginProcessingUrl("/authenticateTheUser")
+                                .permitAll()
+                );
+        return httpSecurity.build();
     }
 }

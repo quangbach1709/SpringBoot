@@ -11,4 +11,9 @@ public class LoginController {
         return "fancy-login";
     }
 
+    @GetMapping("/access-denied")
+    public String showAccessDenied() { //thong bao loi truy cap khong hop le (khong co quyen)
+        return "access-denied";
+    }
+
 }

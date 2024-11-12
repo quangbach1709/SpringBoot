@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Company Home Page</title>
+</head>
+<body>
+<h2>Company Home Page </h2>
+<hr>
+Welcome to my company home page.
+
+<!--Display username and role-->
+<h3>
+    User: <span sec:authentication="principal.username"></span>
+    <br>
+    Role: <span sec:authentication="principal.authorities"></span>
+</h3>
+
+<!--Add a link to pint to /leader thí is fỏ the manager-->
+<a th:href="@{/leaders}">Leadership Meeting</a>
+(Only for manager people)
+<hr>
+<!--Add a link to pint to /system thí is fỏ the admin-->
+<a th:href="@{/systems}">IT Systems Meeting</a>
+(Only for admin people)
+<!-- Logout form -->
+<form action="#" method="post" th:action="@{/logout}">
+    <input type="submit" value="Logout"/>
+</form>
+
+</body>
+</html>
